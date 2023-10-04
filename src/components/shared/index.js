@@ -16,7 +16,7 @@ export const StyledInput = styled(Input)`
 `;
 
 export const StyledButton = styled(Button)`
-  margin-top: 22px;
+  margin: 22px 0;
 `;
 
 export const Result = styled.b`
