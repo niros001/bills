@@ -69,40 +69,41 @@ const WaterTab = () => {
     const landlord = Number((Number(amount) - tenant).toFixed(2));
 
     // Counters
-    let tempTenantCount = tenant;
-    let tempLandLordCount = landlord;
+    let tenantCount = tenant;
+    let landlordCount = landlord;
 
     let tempUsed = 0;
     let tempAdditionalUsed = 0;
     let reduceSameLvl = 0;
 
     prices.forEach((item, index) => {
-      const tenantCalcValue = ((index + 1) === prices.length) ? tempTenantCount : Math.min(tempTenantCount, item.count);
+      const tenantCalcValue = ((index + 1) === prices.length) ? tenantCount : Math.min(tenantCount, item.count);
       if (tenantCalcValue > 0) {
         tempUsed += (tenantCalcValue * item.price);
-        tempTenantCount -= tenantCalcValue;
+        tenantCount -= tenantCalcValue;
       }
-      if ((tempLandLordCount > 0)) {
+      if ((landlordCount > 0)) {
         if (!!tenantCalcValue) { // Same lvl
-          const landLordCalcValue = ((index + 1) === prices.length) ?
-            tempLandLordCount :
-            Math.min(tempLandLordCount, Number((item.count - tenantCalcValue).toFixed(2)));
-          tempLandLordCount -= landLordCalcValue;
-          reduceSameLvl = landLordCalcValue;
+          const landlordCalcValue = ((index + 1) === prices.length) ?
+            landlordCount :
+            Math.min(landlordCount, Number((item.count - tenantCalcValue).toFixed(2)));
+          landlordCount -= landlordCalcValue;
+          reduceSameLvl = landlordCalcValue;
         } else { // New lvl
-          const landLordCalcValue = ((index + 1) === prices.length) ?
-            tempLandLordCount :
-            Math.min(tempLandLordCount, item.count);
-          tempLandLordCount -= (landLordCalcValue);
-          tempAdditionalUsed += (landLordCalcValue * item.price);
+          const landlordCalcValue = ((index + 1) === prices.length) ?
+            landlordCount :
+            Math.min(landlordCount, item.count);
+          landlordCount -= (landlordCalcValue);
+          tempAdditionalUsed += (landlordCalcValue * item.price);
         }
       }
     });
 
     let avgPriceOfUsed = tempUsed / tenant;
-    let avgPriceOfAdditional = (landlord - reduceSameLvl) ? (tempAdditionalUsed / (landlord - reduceSameLvl)) : 0;
+    const landlordRelevantCount = landlord - reduceSameLvl;
+    let avgPriceOfAdditional = landlordRelevantCount ? (tempAdditionalUsed / landlordRelevantCount) : 0;
     const tempAdditional = avgPriceOfAdditional > avgPriceOfUsed ?
-      ((avgPriceOfAdditional - avgPriceOfUsed) * (tenant / Number(amount))) : 0;
+      ((avgPriceOfAdditional - avgPriceOfUsed) * landlordRelevantCount * (tenant / Number(amount))) : 0;
 
     setUsed(tempUsed);
     setAdditional(tempAdditional);
