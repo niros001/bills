@@ -39,11 +39,11 @@ const ElectricityTab = () => {
       />
       <Row>
         <span>סה״כ: </span>
-        {!!total && <Result>{`${total.toFixed(2)}₪`}</Result>}
+        {!!total && <Result>{`${total.toLocaleString()}₪`}</Result>}
       </Row>
       <Row>
         <span>סה״כ כולל מע״מ: </span>
-        {!!totalIncludeTax && <Result className="final">{`${totalIncludeTax.toFixed(2)}₪`}</Result>}
+        {!!totalIncludeTax && <Result className="final">{`${totalIncludeTax.toLocaleString()}₪`}</Result>}
       </Row>
       <StyledButton type="primary" onClick={onCalculate} disabled={disabled}>חשב</StyledButton>
     </Container>

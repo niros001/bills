@@ -134,19 +134,19 @@ const WaterTab = () => {
       <Table size="small" columns={columns} dataSource={data} bordered pagination={false} />
       <Row>
         <span>מחיר שימוש: </span>
-        {!!used && <Result>{`${used.toFixed(2)}₪`}</Result>}
+        {!!used && <Result>{`${used.toLocaleString()}₪`}</Result>}
       </Row>
       <Row>
         <span>תוספת יחסית לתעריף גבוה: </span>
-        {!!total && <Result>{`${additional.toFixed(2)}₪`}</Result>}
+        {!!total && <Result>{`${additional.toLocaleString()}₪`}</Result>}
       </Row>
       <Row>
         <span>סה״כ: </span>
-        {!!total && <Result>{`${total.toFixed(2)}₪`}</Result>}
+        {!!total && <Result>{`${total.toLocaleString()}₪`}</Result>}
       </Row>
       <Row>
         <span>סה״כ כולל מע״מ: </span>
-        {!!totalIncludeTax && <Result className="final">{`${totalIncludeTax.toFixed(2)}₪`}</Result>}
+        {!!totalIncludeTax && <Result className="final">{`${totalIncludeTax.toLocaleString()}₪`}</Result>}
       </Row>
       <StyledButton type="primary" onClick={onCalculate} disabled={disabled}>חשב</StyledButton>
     </Container>
