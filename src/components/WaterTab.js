@@ -37,7 +37,7 @@ const WaterTab = () => {
           value={text}
           onChange={(value) => {
             const newPrices = [...prices];
-            newPrices[index].count = Number(value);
+            newPrices[index].count = value;
             setPrices(newPrices);
           }}
         />
@@ -51,7 +51,7 @@ const WaterTab = () => {
           value={text}
           onChange={(value) => {
             const newPrices = [...prices];
-            newPrices[index].price = Number(value);
+            newPrices[index].price = value;
             setPrices(newPrices);
           }}
         />
