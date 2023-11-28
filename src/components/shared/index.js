@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {Button, Input} from 'antd';
+import {Button, InputNumber} from 'antd';
 
 export const Container = styled.div`
   display: flex;
@@ -11,7 +11,7 @@ export const Row = styled.div`
   align-items: center;
 `;
 
-export const StyledInput = styled(Input)`
+export const StyledInput = styled(InputNumber)`
   margin-bottom: 22px;
 `;
 

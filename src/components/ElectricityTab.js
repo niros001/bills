@@ -2,9 +2,9 @@ import React, {useCallback, useMemo, useState} from 'react';
 import {Container, Row, StyledInput, StyledButton, Result} from './shared';
 
 const ElectricityTab = () => {
-  const [start, setStart] = useState('');
-  const [end, setEnd] = useState('');
-  const [price, setPrice] = useState('51.34');
+  const [start, setStart] = useState(0);
+  const [end, setEnd] = useState(0);
+  const [price, setPrice] = useState(51.34);
   const [total, setTotal] = useState(0);
   const [totalIncludeTax, setTotalIncludeTax] = useState(0);
 
@@ -19,23 +19,20 @@ const ElectricityTab = () => {
   return (
     <Container>
       <StyledInput
-        type="number"
         addonBefore="שעון התחלה"
         placeholder="הכנס מספר שעון"
-        onChange={({target: {value}}) => setStart(value)}
+        onChange={setStart}
       />
       <StyledInput
-        type="number"
         addonBefore="שעון סיום"
         placeholder="הכנס מספר שעון"
-        onChange={({target: {value}}) => setEnd(value)}
+        onChange={setEnd}
       />
       <StyledInput
-        type="number"
         addonBefore="מחיר לקוט״ש באגורות"
         placeholder="הכנס מחיר"
         value={price}
-        onChange={({target: {value}}) => setPrice(value)}
+        onChange={setPrice}
       />
       <Row>
         <span>סה״כ: </span>

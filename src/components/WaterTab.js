@@ -1,5 +1,5 @@
 import React, {useCallback, useMemo, useState} from 'react';
-import { Table, Input } from 'antd';
+import { Table, InputNumber } from 'antd';
 import {Container, Row, StyledInput, StyledButton, Result} from './shared';
 
 const defaultPrices = [
@@ -12,9 +12,9 @@ const defaultPrices = [
 ];
 
 const WaterTab = () => {
-  const [start, setStart] = useState('');
-  const [end, setEnd] = useState('');
-  const [amount, setAmount] = useState('');
+  const [start, setStart] = useState(0);
+  const [end, setEnd] = useState(0);
+  const [amount, setAmount] = useState(0);
   const [prices, setPrices] = useState(defaultPrices);
   const [used, setUsed] = useState(0);
   const [additional, setAdditional] = useState(0);
@@ -33,10 +33,9 @@ const WaterTab = () => {
       title: 'כמות',
       dataIndex: 'count',
       render: (text, record, index) => (
-        <Input
-          type="number"
+        <InputNumber
           value={text}
-          onChange={({target: {value}}) => {
+          onChange={(value) => {
             const newPrices = [...prices];
             newPrices[index].count = Number(value);
             setPrices(newPrices);
@@ -48,10 +47,9 @@ const WaterTab = () => {
       title: 'מחיר ללא מע״מ',
       dataIndex: 'price',
       render: (text, record, index) => (
-        <Input
-          type="number"
+        <InputNumber
           value={text}
-          onChange={({target: {value}}) => {
+          onChange={(value) => {
             const newPrices = [...prices];
             newPrices[index].price = Number(value);
             setPrices(newPrices);
@@ -114,22 +112,19 @@ const WaterTab = () => {
   return (
     <Container>
       <StyledInput
-        type="number"
         addonBefore="שעון התחלה"
         placeholder="הכנס מספר שעון"
-        onChange={({target: {value}}) => setStart(value)}
+        onChange={setStart}
       />
       <StyledInput
-        type="number"
         addonBefore="שעון סיום"
         placeholder="הכנס מספר שעון"
-        onChange={({target: {value}}) => setEnd(value)}
+        onChange={setEnd}
       />
       <StyledInput
-        type="number"
         addonBefore="סה״כ צריכה לחיוב (משותף)"
         placeholder="הכנס צריכה"
-        onChange={({target: {value}}) => setAmount(value)}
+        onChange={setAmount}
       />
       <Table size="small" columns={columns} dataSource={data} bordered pagination={false} />
       <Row>
