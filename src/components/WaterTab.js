@@ -1,5 +1,5 @@
 import React, {useCallback, useMemo, useState} from 'react';
-import { Table, InputNumber } from 'antd';
+import { Table, InputNumber, Divider } from 'antd';
 import {Container, Row, StyledInput, StyledButton, Result} from './shared';
 
 const defaultPrices = [
@@ -109,6 +109,15 @@ const WaterTab = () => {
     setTotalIncludeTax((tempUsed + tempAdditional) * 1.17);
     }, [end, start, amount, prices]);
 
+
+  const onRemove = useCallback(() => {
+    setPrices((prevState) => prevState.slice(0, prevState.length - 1));
+  }, []);
+
+  const onAdd = useCallback(() => {
+    setPrices((prevState) => [...prevState, {count: 0, price: 0}]);
+  }, []);
+
   return (
     <Container>
       <StyledInput
@@ -126,6 +135,11 @@ const WaterTab = () => {
         placeholder="הכנס צריכה"
         onChange={setAmount}
       />
+      <Row>
+        <StyledButton onClick={onRemove}>-</StyledButton>
+        <Divider type="vertical" />
+        <StyledButton onClick={onAdd}>+</StyledButton>
+      </Row>
       <Table size="small" columns={columns} dataSource={data} bordered pagination={false} />
       <Row>
         <span>מחיר שימוש: </span>
